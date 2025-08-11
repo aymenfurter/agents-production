@@ -270,7 +270,7 @@ evaluators = {
 
 Measures how apologetic the agent’s wording is (1–5 scale; higher = less apologetic). This signal is emitted during live monitoring and continuous evaluation.
 
-See full implementation: [apology_tone_evaluator.py](https://github.com/aymenfurter/agents-in-production/blob/main/monitoring/apology_tone_evaluator.py)
+See full implementation: [apology_tone_evaluator.py](https://github.com/aymenfurter/agents-production/blob/main/monitoring/apology_tone_evaluator.py)
 
 ```python
 from azure.ai.evaluation import AzureOpenAIModelConfiguration
