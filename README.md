@@ -9,7 +9,7 @@
 
 <h2>AI Agents in Production</h2>
 
-**Reference implementation demonstrating how to build production-ready AI agents with comprehensive safety evaluations**
+**Reference implementation demonstrating production-ready AI agents with quality and safety evaluations**
 
 <br/>
 
