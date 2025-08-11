@@ -2,6 +2,8 @@
 
 <div align="center">
 
+<img src="assets/logo.png" alt="ContosoCare Logo" width="120">
+
 ![Python](https://img.shields.io/badge/python-3.12-blue.svg)
 ![Azure AI](https://img.shields.io/badge/Azure%20AI-Foundry-0078D4)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
