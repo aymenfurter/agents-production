@@ -1,0 +1,21 @@
+{
+  "id": "test02_accidental_initial_message",
+  "description": "Early accidental damage; agent should gather incident date before deciding.",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I dropped my laptop earlier today."
+    }
+  ],
+  "expected_tool_calls": [
+    {
+      "name": "update_internal_scratchpad"
+    },
+    {
+      "name": "message_to_user",
+      "arguments": {
+        "message": "To check coverage, can you confirm which plan you have (ContosoCare+, Premium, or standard)?"
+      }
+    }
+  ]
+}

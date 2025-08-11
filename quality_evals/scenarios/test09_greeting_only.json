@@ -1,0 +1,21 @@
+{
+  "id": "test09_greeting_only",
+  "description": "Agent should respond with a basic greeting when user only says Hi.",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Hi"
+    }
+  ],
+  "expected_tool_calls": [
+    {
+      "name": "update_internal_scratchpad"
+    },
+    {
+      "name": "message_to_user",
+      "arguments": {
+        "message": "Hello! How can I assist you today?"
+      }
+    }
+  ]
+}

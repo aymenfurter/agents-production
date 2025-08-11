@@ -1,0 +1,16 @@
+azure-ai-projects>=1.1.0b2
+azure-identity>=1.19.0
+python-dotenv>=1.0.0
+scikit-learn>=1.3.0
+numpy>=1.24.0
+azure-ai-evaluation>=1.0.0
+azure-ai-ml>=1.22.0
+azure-ai-evaluation[redteam]
+openai-agents
+tiktoken
+opentelemetry-sdk
+azure-core-tracing-opentelemetry
+azure-monitor-opentelemetry-exporter
+opentelemetry-exporter-otlp
+psycopg2
+gradio>=4.0.0

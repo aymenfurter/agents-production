@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Git
+.git
+.gitignore
+
+# GitHub
+.github/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Gradio
+.gradio/
+flagged/
+
+# Data and logs
+data/
+redteam_outputs/
+safety_outputs/
+*.log
+
+# Environment
+.env.example
+.env.local
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+docs/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# MacOS
+.DS_Store
+
+# Temporary files
+temp/
+tmp/

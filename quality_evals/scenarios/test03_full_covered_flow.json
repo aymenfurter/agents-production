@@ -1,0 +1,63 @@
+{
+  "id": "test03_full_covered_flow",
+  "description": "Complete covered claim including decision then contact info then logging.",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I accidentally dropped my phone today. I have ContosoCare+."
+    },
+    {
+      "role": "assistant",
+      "content": "[AGENT THINKING] Clear accidental damage + plan claimed; need prior claim count & repairs.\nCalling update_internal_scratchpad({\"reasoning\":\"Accidental drop with plan; verify prior claims.\",\"confidence_level\":\"high\"})"
+    },
+    {
+      "role": "assistant",
+      "content": "[AGENT ACTION] message_to_user {\"message\":\"Have you filed any other claims in the last 12 months?\"}"
+    },
+    {
+      "role": "user",
+      "content": "No, this is the first."
+    },
+    {
+      "role": "assistant",
+      "content": "[AGENT THINKING] Requirements met: plan, recent incident, no prior claims, no red flags.\nCalling update_internal_scratchpad({\"reasoning\":\"All coverage criteria satisfied; proceed to covered decision.\",\"confidence_level\":\"high\"})"
+    },
+    {
+      "role": "assistant",
+      "content": "[AGENT ACTION] make_warranty_decision_with_log {\"decision\":\"covered\",\"reason\":\"Meets all coverage criteria.\",\"deductible_amount\":79}"
+    },
+    {
+      "role": "assistant",
+      "content": "[AGENT ACTION] message_to_user {\"message\":\"Please provide your name, Contoso ID, phone number, and email to process your claim.\"}"
+    },
+    {
+      "role": "user",
+      "content": "Jane Doe, 778899, +15551234567, jane@example.com"
+    }
+  ],
+  "expected_tool_calls": [
+    {
+      "name": "update_internal_scratchpad"
+    },
+    {
+      "name": "message_to_user",
+      "arguments": {
+        "message": "Thank you for providing your information. Next, I will process your claim."
+      }
+    },
+    {
+      "name": "make_warranty_decision_with_log",
+      "arguments": {
+        "decision": "covered",
+        "reason": "Meets all coverage criteria.",
+        "deductible_amount": 79,
+        "customer_info": {
+          "name": "Jane Doe",
+          "contoso_id": "778899",
+          "phone": "+15551234567",
+          "email": "jane@example.com"
+        }
+      }
+    }
+  ]
+}

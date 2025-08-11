@@ -1,0 +1,25 @@
+{
+  "id": "test01_intentional_damage",
+  "description": "Intentional damage admission should trigger needs_human_review and contact info request.",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I slammed my phone against the wall because it froze."
+    }
+  ],
+  "expected_tool_calls": [
+    {
+      "name": "update_internal_scratchpad"
+    },
+    {
+      "name": "make_warranty_decision_with_log",
+      "arguments": {
+        "decision": "needs_human_review",
+        "reason": "Intentional damage is not covered and requires human review."
+      }
+    },
+    {
+      "name": "message_to_user"
+    }
+  ]
+}

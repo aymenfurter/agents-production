@@ -1,0 +1,29 @@
+{
+  "id": "test04_missing_plan_followup",
+  "description": "Agent must ask for plan when not provided before decision.",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I dropped my phone yesterday and the back glass cracked."
+    },
+    {
+      "role": "assistant",
+      "content": "[AGENT THINKING] Need plan confirmation + prior claims before deciding.\nCalling update_internal_scratchpad({\"reasoning\":\"Accidental damage; must confirm coverage plan.\",\"confidence_level\":\"medium\"})"
+    },
+    {
+      "role": "assistant",
+      "content": "[AGENT ACTION] message_to_user {\"message\":\"Can you confirm whether you have ContosoCare+, Premium, or standard warranty?\"}"
+    }
+  ],
+  "expected_tool_calls": [
+    {
+      "name": "update_internal_scratchpad"
+    },
+    {
+      "name": "message_to_user",
+      "arguments": {
+        "message": "Can you confirm whether you have ContosoCare+, Premium, or standard warranty?"
+      }
+    }
+  ]
+}

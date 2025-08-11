@@ -1,0 +1,41 @@
+{
+  "id": "test06_express_replacement_covered",
+  "description": "Covered decision recommending express replacement.",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I spilled coffee on my phone 2 days ago. I have Premium coverage."
+    },
+    {
+      "role": "assistant",
+      "content": "[AGENT THINKING] Liquid accidental damage, recent, Premium likely covered. Need prior claims check.\nCalling update_internal_scratchpad({\"reasoning\":\"Premium plan + recent liquid damage.\",\"confidence_level\":\"high\"})"
+    },
+    {
+      "role": "assistant",
+      "content": "[AGENT ACTION] message_to_user {\"message\":\"Have you filed any other claims in the last 12 months?\"}"
+    },
+    {
+      "role": "user",
+      "content": "No, first one."
+    }
+  ],
+  "expected_tool_calls": [
+    {
+      "name": "update_internal_scratchpad"
+    },
+    {
+      "name": "make_warranty_decision_with_log",
+      "arguments": {
+        "decision": "covered",
+        "deductible_amount": 129,
+        "reason": "Premium plan covers recent accidental liquid damage."
+      }
+    },
+    {
+      "name": "message_to_user",
+      "arguments": {
+        "message": "Please provide your name, Contoso ID, phone, and email to finalize your claim."
+      }
+    }
+  ]
+}

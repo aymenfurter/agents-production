@@ -1,0 +1,28 @@
+{
+  "id": "test05_old_damage_escalation",
+  "description": "Damage reported after >30 days should escalate to human review.",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "My screen cracked about two months ago but I'm reporting now."
+    }
+  ],
+  "expected_tool_calls": [
+    {
+      "name": "update_internal_scratchpad"
+    },
+    {
+      "name": "make_warranty_decision_with_log",
+      "arguments": {
+        "decision": "needs_human_review",
+        "reason": "Incident older than 30 days requires manual review."
+      }
+    },
+    {
+      "name": "message_to_user",
+      "arguments": {
+        "message": "A specialist will review this. Please provide your name, phone, and email."
+      }
+    }
+  ]
+}

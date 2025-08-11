@@ -1,0 +1,17 @@
+name: agents-production
+metadata:
+    template: azd-init@1.18.1
+infra:
+    provider: bicep
+    path: infra
+    module: main
+services:
+    agents-production:
+        project: .
+        host: containerapp
+        language: python
+        image: ghcr.io/aymenfurter/agents-in-production/agents-in-production:latest
+resources:
+    agents-production:
+        type: host.containerapp
+        port: 7860

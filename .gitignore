@@ -1,0 +1,16 @@
+__pycache__
+temp
+.env
+.env.local
+*.jsonl
+evaluation_results.json
+redteam_outputs/
+safety_outputs
+
+evaluation*.json
+brand_integrity*.json
+
+.gradio
+data
+redteam.log
+.azure
