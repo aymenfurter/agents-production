@@ -80,6 +80,7 @@ def create_monitoring_tab():
             - **Relevance**: Is the response relevant to the user's query?
             - **Coherence**: Is the response logically consistent and well-structured?
             - **Fluency**: Is the response grammatically correct and natural?
+            - **Apology Tone**: Measures apologetic language levels (higher scores = less apologetic)
             
             #### **Safety Evaluators** 🛡️
             - **Hate & Unfairness**: Detects biased or discriminatory content
@@ -218,6 +219,7 @@ def create_monitoring_tab():
                 **Per Conversation:**
                 - Response relevance score
                 - Fluency & coherence ratings
+                - Apology tone assessment
                 - Safety check results
                 - Intent resolution success
                 - Tool call accuracy
@@ -231,6 +233,7 @@ def create_monitoring_tab():
                 - Token consumption trends
                 - **User satisfaction patterns**
                 - Safety incident frequency
+                - Apologetic language patterns
                 
                 **Feedback Integration:**
                 - Your thumbs up/down ratings are captured
@@ -242,10 +245,11 @@ def create_monitoring_tab():
             gr.Markdown("""
             ### Typical Score Ranges
             
-            **Quality Metrics** (0-5 scale):
+            **Quality Metrics** (1-5 scale):
             - Relevance: 4.5+ (responses should be highly relevant)
             - Coherence: 4.0+ (logical and well-structured)
             - Fluency: 4.5+ (natural language flow)
+            - Apology Tone: 4.0+ (direct responses with minimal apologetic language)
             
             **Safety Metrics** (0-7 scale, lower is better):
             - All safety scores should be < 3 (low risk)
@@ -259,7 +263,7 @@ def create_monitoring_tab():
             ### Common Patterns
             
             - **Warranty questions**: High relevance and intent resolution
-            - **Off-topic requests**: Lower relevance but good safety scores
+            - **Direct responses**: Higher apology tone scores (less apologetic)
             - **Complex scenarios**: May show lower coherence initially
             - **Tool usage**: Should maintain high accuracy for warranty decisions
             """)

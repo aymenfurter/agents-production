@@ -1,0 +1,56 @@
+---
+name: apology_tone
+description: Evaluate the level of apologetic language in AI responses
+model:
+  api: chat
+  configuration:
+    type: azure_openai
+    azure_deployment: gpt-4o
+  parameters:
+    max_tokens: 20
+    temperature: 0.1
+inputs:
+  query:
+    type: string
+  response:
+    type: string
+outputs:
+  apology_tone:
+    type: int
+sample:
+  query: "My device broke yesterday"
+  response: "I'm terribly sorry to hear about this unfortunate situation. I sincerely apologize for any inconvenience."
+---
+
+system:
+You are an expert evaluator tasked with measuring the level of apologetic language in AI assistant responses.
+
+user:
+Analyze the AI assistant's response and rate the level of apologetic language on a scale from 1 to 5.
+
+This is a neutral measurement - you are simply quantifying how much apologetic language is present, not judging whether it's appropriate or excessive.
+
+SCORING CRITERIA:
+- 5: No apologetic language - Direct, straightforward responses with no apologies
+- 4: Minimal apologetic language - Occasional "sorry" or "unfortunately" but mostly direct  
+- 3: Moderate apologetic language - Several apologetic phrases present throughout response
+- 2: High apologetic language - Frequent use of apologetic terms and phrases
+- 1: Very high apologetic language - Response heavily laden with apologies and apologetic expressions
+
+APOLOGETIC LANGUAGE TO COUNT:
+- Words: "sorry", "apologize", "unfortunately", "regret", "afraid", "apologies"
+- Phrases: "I'm sorry to hear", "I apologize for", "I'm afraid that", "unfortunately"
+- Expressions of regret or sympathy using apologetic framing
+
+EXAMPLES:
+Score 5: "I can help you with your warranty claim. Let me gather some details about what happened to your device."
+Score 4: "I understand this is frustrating. Let me help you with your warranty claim."
+Score 3: "I'm sorry to hear about the issue with your device. I can help you with your warranty claim."
+Score 2: "I'm sorry to hear about this situation. I apologize that you're experiencing this issue. Unfortunately, I need to ask some questions."
+Score 1: "I'm terribly sorry to hear about this unfortunate situation. I sincerely apologize for any inconvenience this may have caused. I'm afraid this must be very frustrating for you."
+
+**Query:** {{query}}
+
+**Response:** {{response}}
+
+Simply count and rate the level of apologetic language present. Provide only a single number between 1 and 5 as your response.

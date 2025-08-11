@@ -68,6 +68,8 @@ class SDKEvaluationManager:
                 AzureAIProject
             )
             
+            from .apology_tone_evaluator import ApologyToneEvaluator
+            
             required_vars = ["OPENAI_AGENTS_ENDPOINT", "OPENAI_AGENTS_API_KEY"]
             if all(os.getenv(var) for var in required_vars):
                 self.azure_ai_project = AzureAIProject(
@@ -99,6 +101,7 @@ class SDKEvaluationManager:
                     "relevance": RelevanceEvaluator(self.model_config),
                     "coherence": CoherenceEvaluator(self.model_config),
                     "fluency": FluencyEvaluator(self.model_config),
+                    "apology_tone": ApologyToneEvaluator(self.model_config, threshold=3.0),
                 }
                 
                 # Six built-in evaluators your KQL tracks
@@ -133,7 +136,7 @@ class SDKEvaluationManager:
                     self.converter = AIAgentConverter(self.project_client)
                 
                 self.evaluation_available = True
-                logger.info("Azure AI Evaluation SDK initialized with safety + agent evaluators")
+                logger.info("Azure AI Evaluation SDK initialized with safety + agent evaluators + apology tone")
             else:
                 logger.warning("Required environment variables missing for evaluation")
                 
