@@ -266,6 +266,38 @@ evaluators = {
 }
 ```
 
+### 5. Apology Tone Evaluation (Custom)
+
+Measures how apologetic the agent’s wording is (1–5 scale; higher = less apologetic). This signal is emitted during live monitoring and continuous evaluation.
+
+See full implementation: [apology_tone_evaluator.py](https://github.com/aymenfurter/agents-in-production/blob/main/monitoring/apology_tone_evaluator.py)
+
+```python
+from azure.ai.evaluation import AzureOpenAIModelConfiguration
+from monitoring.apology_tone_evaluator import ApologyToneEvaluator
+
+# Configure model (uses your OPENAI_AGENTS_* env vars)
+model_config = AzureOpenAIModelConfiguration(
+    azure_endpoint=os.environ["OPENAI_AGENTS_ENDPOINT"],
+    azure_deployment=os.getenv("MODEL_DEPLOYMENT_NAME", "gpt-4o"),
+    api_version=os.getenv("OPENAI_AGENTS_API_VERSION", "2024-08-01-preview"),
+    api_key=os.environ["OPENAI_AGENTS_API_KEY"],
+)
+
+apology_eval = ApologyToneEvaluator(model_config, threshold=3.0)
+result = apology_eval(query="User question here", response="Agent response here")
+score = result.get("apology_tone")  # 1–5 (higher = less apologetic)
+```
+
+## Live Monitoring & Continuous Evaluation
+
+This project emits near real-time evaluation results to Application Insights and Azure AI Studio.
+
+Tracked signals include:
+- Quality: Relevance, Fluency, Coherence, Apology Tone (higher = less apologetic)
+- Safety: Hate & Unfairness, Violence, Self-Harm, Indirect Attack
+- Agent: Intent Resolution, Task Adherence, Tool Call Accuracy
+
 
 ## Post Infrastructure Deployment - Manual Configuration Required
 
