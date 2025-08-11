@@ -391,13 +391,39 @@ class SDKEvaluationManager:
             return None
 
     def _extract_score(self, result, evaluator_name: str) -> Optional[float]:
-        if hasattr(result, evaluator_name):
-            return getattr(result, evaluator_name)
-        if hasattr(result, 'score'):
-            return result.score
+        safety_evaluators = ["hate_unfairness", "violence", "self_harm", "indirect_attack", "code_vulnerability"]
+        
+        if evaluator_name in safety_evaluators:
+            score = None
+            if hasattr(result, evaluator_name):
+                score = getattr(result, evaluator_name)
+            elif hasattr(result, 'score'):
+                score = result.score
+            elif isinstance(result, dict):
+                score = result.get(evaluator_name) or result.get('score')
+            
+            if isinstance(score, str):
+                return self._convert_safety_label_to_score(score)
+            elif isinstance(score, (int, float)):
+                return float(score)
+                
         if isinstance(result, dict):
             return result.get(evaluator_name) or result.get('score')
         return None
+
+    def _convert_safety_label_to_score(self, label: str) -> Optional[float]:
+        """Convert safety evaluator string labels to numeric scores based on 0-5 scale."""
+        label_lower = label.lower().strip()
+        
+        label_mapping = {
+            "very low": 0,
+            "low": 2,  
+            "medium": 3,
+            "high": 4, 
+            "very high": 5
+        }
+        
+        return label_mapping.get(label_lower)
 
     def _extract_reasoning(self, result, evaluator_name: str) -> Optional[str]:
         reasoning_key = f"{evaluator_name}_reason"
